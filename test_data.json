@@ -1,0 +1,162 @@
+[
+    {
+      "test_name": "test_status_code",
+      "method": "GET",
+      "endpoint": "/posts",
+      "expected_status_code": 200
+    },
+    {
+      "test_name": "test_value_in_response",
+      "method": "GET",
+      "endpoint": "/posts",
+      "expected_value": 1,
+      "json_path": "$[0].id"
+    },
+    {
+      "test_name": "test_with_variables",
+      "method": "GET",
+      "endpoint": "/posts",
+      "expected_value": 1,
+      "json_path": "$[0].id"
+    },
+    {
+      "test_name": "test_set_variables",
+      "method": "GET",
+      "endpoint": "/posts",
+      "expected_value": 1,
+      "json_path": "$[0].id"
+    },
+    {
+      "test_name": "test_put_post_success",
+      "method": "PUT",
+      "endpoint": "/posts/{post_id}",
+      "expected_status_code": 200,
+      "request_body": {
+        "title": "Updated Post",
+        "body": "This is the updated content of the post.",
+        "userId": 1
+      },
+      "expected_response": {
+        "title": "Updated Post"
+      }
+    },
+    {
+      "test_name": "test_put_post_id_remains_the_same",
+      "method": "PUT",
+      "endpoint": "/posts/{post_id}",
+      "expected_status_code": 200,
+      "expected_response": {
+        "id": 1
+      }
+    },
+    {
+      "test_name": "test_put_post_body_updated",
+      "method": "PUT",
+      "endpoint": "/posts/{post_id}",
+      "expected_status_code": 200,
+      "expected_response": {
+        "body": "This is the updated content of the post."
+      }
+    },
+    {
+      "test_name": "test_delete_post_not_found",
+      "method": "DELETE",
+      "endpoint": "/posts/{post_id}",
+      "expected_status_code": 200
+    },
+    {
+      "test_name": "test_delete_response_empty",
+      "method": "DELETE",
+      "endpoint": "/posts/{post_id}",
+      "expected_status_code": 200,
+      "expected_response": {}
+    },
+    {
+      "test_name": "test_response_contains_content_type_header",
+      "method": "GET",
+      "endpoint": "/posts/{post_id}",
+      "expected_header": "Content-Type"
+    },
+    {
+      "test_name": "test_post_create_valid_data",
+      "method": "POST",
+      "endpoint": "/posts",
+      "expected_status_code": 201,
+      "request_body": {
+        "title": "foo",
+        "body": "bar",
+        "userId": 1
+      }
+    },
+    {
+      "test_name": "test_post_create_missing_body",
+      "method": "POST",
+      "endpoint": "/posts",
+      "expected_status_code": 201,
+      "request_body": {
+        "title": "foo",
+        "userId": 1
+      }
+    },
+    {
+      "test_name": "test_post_create_invalid_userId",
+      "method": "POST",
+      "endpoint": "/posts",
+      "expected_status_code": 201,
+      "request_body": {
+        "title": "foo",
+        "body": "bar",
+        "userId": "invalid"
+      }
+    },
+    {
+      "test_name": "test_post_create_empty_title",
+      "method": "POST",
+      "endpoint": "/posts",
+      "expected_status_code": 201,
+      "request_body": {
+        "title": "",
+        "body": "bar",
+        "userId": 1
+      }
+    },
+    {
+      "test_name": "test_post_create_with_extra_fields",
+      "method": "POST",
+      "endpoint": "/posts",
+      "expected_status_code": 201,
+      "request_body": {
+        "title": "foo",
+        "body": "bar",
+        "userId": 1,
+        "extraField": "notAllowed"
+      }
+    },
+    {
+      "test_name": "test_get_non_existent_post",
+      "method": "GET",
+      "endpoint": "/posts/{post_id}",
+      "expected_status_code": 404
+    },
+    {
+      "test_name": "test_delete_non_existent_post",
+      "method": "DELETE",
+      "endpoint": "/posts/{post_id}",
+      "expected_status_code": [200, 404]
+    },
+    {
+      "test_name": "test_patch_post",
+      "method": "PATCH",
+      "endpoint": "/posts/{post_id}",
+      "expected_status_code": 200,
+      "request_body": {
+        "title": "Partially Updated Title"
+      }
+    },
+    {
+      "test_name": "test_get_posts_list",
+      "method": "GET",
+      "endpoint": "/posts",
+      "expected_status_code": 200
+    }
+  ]
